@@ -90,7 +90,6 @@ import org.checkerframework.checker.nullness.qual.Nullable;
             int k = ps.executeUpdate();
             if (k == 1) {
                 responseMessage = ResponseCode.SUCCESS.name();
-                ;
             }
         } catch (Exception e) {
             responseMessage += " : " + e.getMessage();
