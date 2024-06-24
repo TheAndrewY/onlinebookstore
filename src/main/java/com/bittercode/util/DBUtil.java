@@ -6,10 +6,14 @@ import java.sql.SQLException;
 
 import com.bittercode.constant.ResponseCode;
 import com.bittercode.model.StoreException;
+import org.checkerframework.checker.nullness.qual.Nullable;
 
-public class DBUtil {
 
-    private static Connection connection;
+// Suppressing warnings here because the static block handles all exceptions and
+// potential null parameters/references via the catch clause
+@SuppressWarnings("argument") public class DBUtil {
+
+    private static @Nullable Connection connection;
 
     static {
 
@@ -20,7 +24,6 @@ public class DBUtil {
             connection = DriverManager.getConnection(DatabaseConfig.CONNECTION_STRING, DatabaseConfig.DB_USER_NAME,
                     DatabaseConfig.DB_PASSWORD);
         } catch (SQLException | ClassNotFoundException e) {
-
             e.printStackTrace();
 
         }

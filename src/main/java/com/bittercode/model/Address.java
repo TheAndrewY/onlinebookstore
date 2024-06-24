@@ -1,18 +1,20 @@
 package com.bittercode.model;
 
+import org.checkerframework.checker.nullness.qual.*;
+
 import java.io.Serializable;
 
 public class Address implements Serializable {
 
-    private String addressLine1;
-    private String addressLine2;
-    private String city;
-    private String state;
-    private String country;
+    private @MonotonicNonNull String addressLine1;
+    private @MonotonicNonNull String addressLine2;
+    private @MonotonicNonNull String city;
+    private @MonotonicNonNull String state;
+    private @MonotonicNonNull String country;
     private long pinCode;
-    private String phone;
+    private @MonotonicNonNull String phone;
 
-    public String getAddressLine1() {
+    @RequiresNonNull("this.addressLine1") public String getAddressLine1() {
         return addressLine1;
     }
 
@@ -20,7 +22,7 @@ public class Address implements Serializable {
         this.addressLine1 = addressLine1;
     }
 
-    public String getAddressLine2() {
+    @RequiresNonNull("this.addressLine2") public String getAddressLine2() {
         return addressLine2;
     }
 
@@ -28,7 +30,7 @@ public class Address implements Serializable {
         this.addressLine2 = addressLine2;
     }
 
-    public String getCity() {
+    @RequiresNonNull("this.city") public String getCity() {
         return city;
     }
 
@@ -36,7 +38,7 @@ public class Address implements Serializable {
         this.city = city;
     }
 
-    public String getState() {
+    @RequiresNonNull("this.state") public String getState() {
         return state;
     }
 
@@ -44,7 +46,7 @@ public class Address implements Serializable {
         this.state = state;
     }
 
-    public String getCountry() {
+    @RequiresNonNull("this.country") public String getCountry() {
         return country;
     }
 
@@ -52,7 +54,7 @@ public class Address implements Serializable {
         this.country = country;
     }
 
-    public long getPinCode() {
+    @RequiresNonNull("this.pinCode") public long getPinCode() {
         return pinCode;
     }
 
@@ -60,7 +62,7 @@ public class Address implements Serializable {
         this.pinCode = pinCode;
     }
 
-    public String getPhone() {
+    @RequiresNonNull("this.phone") public String getPhone() {
         return phone;
     }
 

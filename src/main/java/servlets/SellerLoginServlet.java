@@ -16,7 +16,8 @@ import com.bittercode.model.UserRole;
 import com.bittercode.service.UserService;
 import com.bittercode.service.impl.UserServiceImpl;
 
-public class SellerLoginServlet extends HttpServlet {
+//Suppressed warning for same reason in CustomerLoginServlet.java file
+@SuppressWarnings("contracts.precondition")public class SellerLoginServlet extends HttpServlet {
 
     UserService userService = new UserServiceImpl();
 

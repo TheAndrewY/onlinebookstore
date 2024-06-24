@@ -13,7 +13,7 @@ public class StoreException extends IOException {
     public StoreException(String errorMessage) {
         super(errorMessage);
         this.errorCode = "BAD_REQUEST";
-        this.setStatusCode(400);
+        this.statusCode = 400;
         this.errorMessage = errorMessage;
     }
 
@@ -21,7 +21,7 @@ public class StoreException extends IOException {
         super(errorCodes.getMessage());
         this.statusCode = errorCodes.getCode();
         this.errorMessage = errorCodes.getMessage();
-        this.setErrorCode(errorCodes.name());
+        this.errorCode = errorCodes.name();
     }
 
     public StoreException(String errroCode, String errorMessage) {

@@ -37,14 +37,12 @@ public class ErrorHandlerServlet extends HttpServlet {
             errorCode = errorCodes.get().name();
         }
 
-        if (throwable != null && throwable instanceof StoreException) {
+        if (throwable instanceof StoreException) {
             StoreException storeException = (StoreException) throwable;
-            if (storeException != null) {
-                errorMessage = storeException.getMessage();
-                statusCode = storeException.getStatusCode();
-                errorCode = storeException.getErrorCode();
-                storeException.printStackTrace();
-            }
+            errorMessage = storeException.getMessage();
+            statusCode = storeException.getStatusCode();
+            errorCode = storeException.getErrorCode();
+            storeException.printStackTrace();
         }
 
         System.out.println("======ERROR TRIGGERED========");
@@ -54,6 +52,11 @@ public class ErrorHandlerServlet extends HttpServlet {
         System.out.println("Error Code: " + errorCode);
         System.out.println("Error Message: " + errorMessage);
         System.out.println("=============================");
+
+
+        if(errorMessage==null){
+            errorMessage = "An Unknown Error has Occurred!";
+        }
 
         if (StoreUtil.isLoggedIn(UserRole.CUSTOMER, req.getSession())) {
             RequestDispatcher rd = req.getRequestDispatcher("CustomerHome.html");
@@ -79,7 +82,7 @@ public class ErrorHandlerServlet extends HttpServlet {
 
     }
 
-    private void showErrorMessage(PrintWriter pw, String errorCode, String errorMessage) {
+     private void showErrorMessage(PrintWriter pw, String errorCode, String errorMessage) {
         pw.println("<div class='container my-5'>"
                 + "<div class=\"alert alert-success\" role=\"alert\" style='max-width:450px; text-align:center; margin:auto;'>\r\n"
                 + "  <h4 class=\"alert-heading\">"

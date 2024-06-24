@@ -14,8 +14,12 @@ import com.bittercode.model.User;
 import com.bittercode.model.UserRole;
 import com.bittercode.service.UserService;
 import com.bittercode.util.DBUtil;
+import org.checkerframework.checker.nullness.qual.Nullable;
 
-public class UserServiceImpl implements UserService {
+
+// Suppressing warnings because the only time "register" method is used is when all used fields of
+// The user parameter are NonNull due to setter method implementations added.
+@SuppressWarnings("contracts.precondition") public class UserServiceImpl implements UserService {
 
     private static final String registerUserQuery = "INSERT INTO " + UsersDBConstants.TABLE_USERS
             + "  VALUES(?,?,?,?,?,?,?,?)";
@@ -25,6 +29,7 @@ public class UserServiceImpl implements UserService {
             + UsersDBConstants.COLUMN_USERTYPE + "=?";
 
     @Override
+    @Nullable
     public User login(UserRole role, String email, String password, HttpSession session) throws StoreException {
         Connection con = DBUtil.getConnection();
         PreparedStatement ps;
@@ -37,10 +42,11 @@ public class UserServiceImpl implements UserService {
             ps.setString(3, userType);
             ResultSet rs = ps.executeQuery();
             if (rs.next()) {
+                //Setter methods will never set a value as null (check implementation)
                 user = new User();
                 user.setFirstName(rs.getString("firstName"));
-                user.setLastName(rs.getString("lastName"));
-                user.setPhone(rs.getLong("phone"));
+                user.setLastName(rs.getString( "lastName"));
+                user.setPhone(rs.getLong( "phone"));
                 user.setEmailId(email);
                 user.setPassword(password);
                 session.setAttribute(role.toString(), user.getEmailId());
@@ -84,7 +90,6 @@ public class UserServiceImpl implements UserService {
             int k = ps.executeUpdate();
             if (k == 1) {
                 responseMessage = ResponseCode.SUCCESS.name();
-                ;
             }
         } catch (Exception e) {
             responseMessage += " : " + e.getMessage();
