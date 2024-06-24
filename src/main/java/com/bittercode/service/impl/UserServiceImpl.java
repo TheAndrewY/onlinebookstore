@@ -14,8 +14,9 @@ import com.bittercode.model.User;
 import com.bittercode.model.UserRole;
 import com.bittercode.service.UserService;
 import com.bittercode.util.DBUtil;
-import org.checkerframework.checker.nullness.qual.NonNull;
 import org.checkerframework.checker.nullness.qual.Nullable;
+
+
 // Suppressing warnings because the only time "register" method is used is when all used fields of
 // The user parameter are NonNull due to setter method implementations added.
 @SuppressWarnings("contracts.precondition") public class UserServiceImpl implements UserService {
@@ -39,7 +40,7 @@ import org.checkerframework.checker.nullness.qual.Nullable;
             ps.setString(1, email);
             ps.setString(2, password);
             ps.setString(3, userType);
-            @NonNull ResultSet rs = ps.executeQuery();
+            ResultSet rs = ps.executeQuery();
             if (rs.next()) {
                 //Setter methods will never set a value as null (check implementation)
                 user = new User();
@@ -72,7 +73,7 @@ import org.checkerframework.checker.nullness.qual.Nullable;
     }
 
     @Override
-    public String register(UserRole role, @NonNull User user) throws StoreException {
+    public String register(UserRole role, User user) throws StoreException {
         String responseMessage = ResponseCode.FAILURE.name();
         Connection con = DBUtil.getConnection();
         try {

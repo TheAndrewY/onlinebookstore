@@ -18,7 +18,7 @@ public class Address implements Serializable {
         return addressLine1;
     }
 
-     public void setAddressLine1(String addressLine1) {
+    public void setAddressLine1(String addressLine1) {
         this.addressLine1 = addressLine1;
     }
 
@@ -34,7 +34,7 @@ public class Address implements Serializable {
         return city;
     }
 
-     public void setCity(String city) {
+    public void setCity(String city) {
         this.city = city;
     }
 
@@ -42,7 +42,7 @@ public class Address implements Serializable {
         return state;
     }
 
-     public void setState(String state) {
+    public void setState(String state) {
         this.state = state;
     }
 
@@ -58,7 +58,7 @@ public class Address implements Serializable {
         return pinCode;
     }
 
-     public void setPinCode(long pinCode) {
+    public void setPinCode(long pinCode) {
         this.pinCode = pinCode;
     }
 
@@ -66,7 +66,7 @@ public class Address implements Serializable {
         return phone;
     }
 
-     public void setPhone(String phone) {
+    public void setPhone(String phone) {
         this.phone = phone;
     }
 

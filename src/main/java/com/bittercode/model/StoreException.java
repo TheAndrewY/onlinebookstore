@@ -3,7 +3,6 @@ package com.bittercode.model;
 import java.io.IOException;
 
 import com.bittercode.constant.ResponseCode;
-import org.checkerframework.checker.nullness.qual.EnsuresNonNull;
 
 public class StoreException extends IOException {
 
@@ -55,7 +54,7 @@ public class StoreException extends IOException {
         this.errorMessage = errorMessage;
     }
 
-    @EnsuresNonNull("this.statusCode") public int getStatusCode() {
+    public int getStatusCode() {
         return statusCode;
     }
 

@@ -14,7 +14,6 @@ import com.bittercode.constant.ResponseCode;
 import com.bittercode.model.StoreException;
 import com.bittercode.model.UserRole;
 import com.bittercode.util.StoreUtil;
-import org.checkerframework.checker.nullness.qual.*;
 
 public class ErrorHandlerServlet extends HttpServlet {
 
@@ -54,6 +53,11 @@ public class ErrorHandlerServlet extends HttpServlet {
         System.out.println("Error Message: " + errorMessage);
         System.out.println("=============================");
 
+
+        if(errorMessage==null){
+            errorMessage = "An Unknown Error has Occurred!";
+        }
+
         if (StoreUtil.isLoggedIn(UserRole.CUSTOMER, req.getSession())) {
             RequestDispatcher rd = req.getRequestDispatcher("CustomerHome.html");
             rd.include(req, res);
@@ -78,7 +82,7 @@ public class ErrorHandlerServlet extends HttpServlet {
 
     }
 
-     private void showErrorMessage(PrintWriter pw, String errorCode, @Nullable String errorMessage) {
+     private void showErrorMessage(PrintWriter pw, String errorCode, String errorMessage) {
         pw.println("<div class='container my-5'>"
                 + "<div class=\"alert alert-success\" role=\"alert\" style='max-width:450px; text-align:center; margin:auto;'>\r\n"
                 + "  <h4 class=\"alert-heading\">"

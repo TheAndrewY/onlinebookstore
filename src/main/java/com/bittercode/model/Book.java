@@ -20,11 +20,9 @@ public class Book implements Serializable {
         this.price = price;
         this.quantity = quantity;
     }
-    /*  Redundant default constructor for Book class
     public Book() {
         super();
     }
-    */
 
 
     public @Nullable String getBarcode() {
@@ -34,7 +32,6 @@ public class Book implements Serializable {
     @EnsuresNonNull("this.barcode") public void setBarcode(String barcode) {
         this.barcode = barcode;
     }
-
     public @Nullable String getName() {
         return name;
     }
@@ -42,7 +39,6 @@ public class Book implements Serializable {
     @EnsuresNonNull("this.name")public void setName(String name) {
         this.name = name;
     }
-
     public @Nullable String getAuthor() {
         return author;
     }
@@ -63,7 +59,7 @@ public class Book implements Serializable {
         return price;
     }
 
-    @EnsuresNonNull("this.price")public  void setPrice(double price) {
+    @EnsuresNonNull("this.price") public void setPrice(double price) {
         this.price = price;
     }
 

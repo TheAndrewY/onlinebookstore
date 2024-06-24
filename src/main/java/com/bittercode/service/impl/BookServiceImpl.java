@@ -13,8 +13,6 @@ import com.bittercode.model.Book;
 import com.bittercode.model.StoreException;
 import com.bittercode.service.BookService;
 import com.bittercode.util.DBUtil;
-import org.checkerframework.checker.initialization.qual.Initialized;
-import org.checkerframework.checker.initialization.qual.UnknownInitialization;
 import org.checkerframework.checker.nullness.qual.*;
 
 public class BookServiceImpl implements BookService {
@@ -39,16 +37,14 @@ public class BookServiceImpl implements BookService {
             + BooksDBConstants.COLUMN_QUANTITY + "=? "
             + "  WHERE " + BooksDBConstants.COLUMN_BARCODE
             + "=?";
-
     @Override
     public Book getBookById(String bookId) throws StoreException {
-        Book book = new Book("","","",-1,-1);
+        Book book = new Book();
         Connection con = DBUtil.getConnection();
         try {
             PreparedStatement ps = con.prepareStatement(getBookByIdQuery);
             ps.setString(1, bookId);
             ResultSet rs = ps.executeQuery();
-
             while (rs.next()) {
                 String bCode = rs.getString(1);
                 String bName = rs.getString(2);

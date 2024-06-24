@@ -24,7 +24,6 @@ import org.checkerframework.checker.nullness.qual.Nullable;
             connection = DriverManager.getConnection(DatabaseConfig.CONNECTION_STRING, DatabaseConfig.DB_USER_NAME,
                     DatabaseConfig.DB_PASSWORD);
         } catch (SQLException | ClassNotFoundException e) {
-
             e.printStackTrace();
 
         }

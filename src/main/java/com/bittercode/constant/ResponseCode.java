@@ -1,5 +1,6 @@
 package com.bittercode.constant;
 
+
 import org.checkerframework.checker.nullness.qual.EnsuresNonNull;
 
 import java.util.Arrays;
@@ -27,7 +28,7 @@ public enum ResponseCode {
         this.code = code;
     }
 
-    @EnsuresNonNull("this.message") public String getMessage() {
+    public String getMessage() {
         return message;
     }
 

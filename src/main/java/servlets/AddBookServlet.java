@@ -17,7 +17,6 @@ import com.bittercode.model.UserRole;
 import com.bittercode.service.BookService;
 import com.bittercode.service.impl.BookServiceImpl;
 import com.bittercode.util.StoreUtil;
-
 public class AddBookServlet extends HttpServlet {
     BookService bookService = new BookServiceImpl();
 
