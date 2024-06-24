@@ -17,7 +17,7 @@ import com.bittercode.model.UserRole;
 import com.bittercode.service.UserService;
 import com.bittercode.service.impl.UserServiceImpl;
 
-public class CustomerRegisterServlet extends HttpServlet {
+ public class CustomerRegisterServlet extends HttpServlet {
 
     UserService userService = new UserServiceImpl();
 

@@ -13,6 +13,9 @@ import com.bittercode.model.Book;
 import com.bittercode.model.StoreException;
 import com.bittercode.service.BookService;
 import com.bittercode.util.DBUtil;
+import org.checkerframework.checker.initialization.qual.Initialized;
+import org.checkerframework.checker.initialization.qual.UnknownInitialization;
+import org.checkerframework.checker.nullness.qual.*;
 
 public class BookServiceImpl implements BookService {
 
@@ -39,7 +42,7 @@ public class BookServiceImpl implements BookService {
 
     @Override
     public Book getBookById(String bookId) throws StoreException {
-        Book book = null;
+        Book book = new Book("","","",-1,-1);
         Connection con = DBUtil.getConnection();
         try {
             PreparedStatement ps = con.prepareStatement(getBookByIdQuery);
@@ -52,7 +55,6 @@ public class BookServiceImpl implements BookService {
                 String bAuthor = rs.getString(3);
                 int bPrice = rs.getInt(4);
                 int bQty = rs.getInt(5);
-
                 book = new Book(bCode, bName, bAuthor, bPrice, bQty);
             }
         } catch (SQLException e) {
@@ -76,7 +78,6 @@ public class BookServiceImpl implements BookService {
                 String bAuthor = rs.getString(3);
                 int bPrice = rs.getInt(4);
                 int bQty = rs.getInt(5);
-
                 Book book = new Book(bCode, bName, bAuthor, bPrice, bQty);
                 books.add(book);
             }
@@ -127,7 +128,7 @@ public class BookServiceImpl implements BookService {
     }
 
     @Override
-    public String updateBookQtyById(String bookId, int quantity) throws StoreException {
+    public String updateBookQtyById(@Nullable String bookId, int quantity) throws StoreException {
         String responseCode = ResponseCode.FAILURE.name();
         Connection con = DBUtil.getConnection();
         try {

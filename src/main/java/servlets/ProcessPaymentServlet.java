@@ -18,6 +18,7 @@ import com.bittercode.model.UserRole;
 import com.bittercode.service.BookService;
 import com.bittercode.service.impl.BookServiceImpl;
 import com.bittercode.util.StoreUtil;
+import org.checkerframework.checker.nullness.qual.Nullable;
 
 public class ProcessPaymentServlet extends HttpServlet {
 
@@ -45,18 +46,20 @@ public class ProcessPaymentServlet extends HttpServlet {
             List<Cart> cartItems = null;
             if (session.getAttribute("cartItems") != null)
                 cartItems = (List<Cart>) session.getAttribute("cartItems");
-            for (Cart cart : cartItems) {
-                Book book = cart.getBook();
-                double bPrice = book.getPrice();
-                String bCode = book.getBarcode();
-                String bName = book.getName();
-                String bAuthor = book.getAuthor();
-                int availableQty = book.getQuantity();
-                int qtToBuy = cart.getQuantity();
-                availableQty = availableQty - qtToBuy;
-                bookService.updateBookQtyById(bCode, availableQty);
-                pw.println(this.addBookToCard(bCode, bName, bAuthor, bPrice, availableQty));
-                session.removeAttribute("qty_" + bCode);
+            if (cartItems != null) {
+                for (Cart cart : cartItems) {
+                    Book book = cart.getBook();
+                    double bPrice = book.getPrice();
+                    String bCode = book.getBarcode();
+                    String bName = book.getName();
+                    String bAuthor = book.getAuthor();
+                    int availableQty = book.getQuantity();
+                    int qtToBuy = cart.getQuantity();
+                    availableQty = availableQty - qtToBuy;
+                    bookService.updateBookQtyById(bCode, availableQty);
+                    pw.println(this.addBookToCard(bCode, bName, bAuthor, bPrice, availableQty));
+                    session.removeAttribute("qty_" + bCode);
+                }
             }
             session.removeAttribute("amountToPay");
             session.removeAttribute("cartItems");
@@ -69,7 +72,7 @@ public class ProcessPaymentServlet extends HttpServlet {
         }
     }
 
-    public String addBookToCard(String bCode, String bName, String bAuthor, double bPrice, int bQty) {
+    public String addBookToCard(@Nullable String bCode,@Nullable String bName,@Nullable String bAuthor, double bPrice, int bQty) {
         String button = "<a href=\"#\" class=\"btn btn-info\">Order Placed</a>\r\n";
         return "<div class=\"card\">\r\n"
                 + "                <div class=\"row card-body\">\r\n"

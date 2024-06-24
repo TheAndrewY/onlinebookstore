@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.bittercode.model.Book;
 import com.bittercode.model.StoreException;
+import org.checkerframework.checker.nullness.qual.Nullable;
 
 public interface BookService {
 
@@ -17,7 +18,7 @@ public interface BookService {
 
     public String addBook(Book book) throws StoreException;
 
-    public String updateBookQtyById(String bookId, int quantity) throws StoreException;
+    public String updateBookQtyById(@Nullable String bookId, int quantity) throws StoreException;
     
     public String updateBook(Book book) throws StoreException;
 

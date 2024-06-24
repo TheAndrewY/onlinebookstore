@@ -14,6 +14,7 @@ import com.bittercode.constant.ResponseCode;
 import com.bittercode.model.StoreException;
 import com.bittercode.model.UserRole;
 import com.bittercode.util.StoreUtil;
+import org.checkerframework.checker.nullness.qual.*;
 
 public class ErrorHandlerServlet extends HttpServlet {
 
@@ -37,14 +38,12 @@ public class ErrorHandlerServlet extends HttpServlet {
             errorCode = errorCodes.get().name();
         }
 
-        if (throwable != null && throwable instanceof StoreException) {
+        if (throwable instanceof StoreException) {
             StoreException storeException = (StoreException) throwable;
-            if (storeException != null) {
-                errorMessage = storeException.getMessage();
-                statusCode = storeException.getStatusCode();
-                errorCode = storeException.getErrorCode();
-                storeException.printStackTrace();
-            }
+            errorMessage = storeException.getMessage();
+            statusCode = storeException.getStatusCode();
+            errorCode = storeException.getErrorCode();
+            storeException.printStackTrace();
         }
 
         System.out.println("======ERROR TRIGGERED========");
@@ -79,7 +78,7 @@ public class ErrorHandlerServlet extends HttpServlet {
 
     }
 
-    private void showErrorMessage(PrintWriter pw, String errorCode, String errorMessage) {
+     private void showErrorMessage(PrintWriter pw, String errorCode, @Nullable String errorMessage) {
         pw.println("<div class='container my-5'>"
                 + "<div class=\"alert alert-success\" role=\"alert\" style='max-width:450px; text-align:center; margin:auto;'>\r\n"
                 + "  <h4 class=\"alert-heading\">"
